@@ -17,7 +17,7 @@ function fallback(urls) {
 				// Safari needs a timeout
 				setTimeout(function () {
 					frame.parentNode.removeChild(frame);
-				}, 1000);
+				}, 5000);
 
 				if (i < urls.length) {
 					createIframe();
@@ -52,7 +52,7 @@ module.exports = function (urls) {
 		throw new Error('`urls` required');
 	}
 
-	if (typeof document.createElement('a').download === 'undefined') {
+	if ((typeof document.createElement('a').download === 'undefined') || isFirefox()) {
 		return fallback(urls);
 	}
 
